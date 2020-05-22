@@ -1,0 +1,31 @@
+POST http://localhost:3000/api/getTodo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNTg5OTIzOTU4fQ.07Y7w5ShxDdu4vjMmVB7uDO_QH7m1TuYuBNDQ0tlrzw
+Content-Type: application/json
+
+{
+    "userid": 4
+}
+###
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+    "email": "asd",
+    "password": "asd"
+}
+
+###
+
+POST http://localhost:3000/api/createTodo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNTg5OTIzOTU4fQ.07Y7w5ShxDdu4vjMmVB7uDO_QH7m1TuYuBNDQ0tlrzw
+Content-Type: application/json
+
+{
+    "title": "yeet",
+    "description": "Yeet from creating2"
+}
+
+###
+GET http://localhost:3000/api/getUsernameFromToken
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNTg5OTIzOTU4fQ.07Y7w5ShxDdu4vjMmVB7uDO_QH7m1TuYuBNDQ0tlrzw
