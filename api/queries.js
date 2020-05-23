@@ -83,7 +83,7 @@ const loginUser = (req, res) => {
 
 const getTodosForUser = (req, res) => {
     const userid = req.user.id;
-    pool.query("SELECT title, description FROM todoobject WHERE userid = " + userid, function (err, result) {
+    pool.query("SELECT title, description, duedate FROM todoobject WHERE userid = " + userid, function (err, result) {
         if (err) {
             res.sendStatus(500)
         }
@@ -94,11 +94,27 @@ const getTodosForUser = (req, res) => {
     })
 }
 
+const getTodosForDate = (req, res) => {
+    
+    const userid = req.user.id;
+    const date = req.body.date;
+    pool.query("SELECT title, description FROM todoobject WHERE duedate = '{0}' AND userid = {1}".format(date, userid), function (err, result) {
+        if (err) {
+            res.status(200).json({hasTodos: false})
+        }
+        else{
+            res.status(200).json({hasTodos: true, data: result.rows});
+        }
+        
+    })
+}
+
 const createTodo = (req, res) => {
     const userid = req.user.id;
     const title = req.body.title;
     const description = req.body.description;
-    pool.query("INSERT INTO todoobject (userid, title, description) VALUES({0}, '{1}', '{2}')".format(userid, title, description), function (err, result){
+    const duedate = req.body.duedate;
+    pool.query("INSERT INTO todoobject (userid, title, description, duedate) VALUES({0}, '{1}', '{2}', '{3}')".format(userid, title, description, duedate), function (err, result){
         if(err){
             res.sendStatus(500);
         }
@@ -129,4 +145,4 @@ String.prototype.format = function () {
     return formatted;
 };
 
-module.exports = { getAllUsers, registerUser, loginUser, getTodosForUser, createTodo, getUserName} 
+module.exports = { getAllUsers, registerUser, loginUser, getTodosForUser, createTodo, getUserName, getTodosForDate} 
