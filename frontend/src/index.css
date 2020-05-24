@@ -73,3 +73,29 @@ body, html{
 
 .calenderForwardButton{
 }
+
+.containerForLeftBar{
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+}
+
+.LeftBar{
+  width: 20%;
+  height: 100%;
+}
+
+.LeftBarContainer{
+  background-color: purple;
+}
+
+.LeftBarLink>a{
+  color: white;
+}
+
+.Footer{
+  height: 10%;
+  background-color: black;
+  color: white;
+}

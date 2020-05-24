@@ -2,7 +2,8 @@ import React from 'react';
 import { Redirect } from 'react-router-dom'
 import TopBar from './TopBar'
 import TodoList from './TodoList'
-import TodoCalender from './TodoCalender';
+import LeftBar from './LeftBar';
+import Footer from './Footer'
 
 class Todo extends React.Component {
     constructor(props) {
@@ -13,15 +14,19 @@ class Todo extends React.Component {
 
     render() {
         if (!this.state.isFetched) {
-            return<div className='container'> <TopBar/></div>;
+            return <div className='container'> <TopBar /> <Footer/></div>;
         }
         if (this.state.isLoggedIn) {
             return (
-            <div className='container'>
-                <TopBar/>
-                <TodoList data={this.state.data}/>
-                <TodoCalender month={2} year={2019} />
-            </div>
+                <div className="container">
+                    <TopBar />
+                    <div className="containerForLeftBar">
+                        <LeftBar></LeftBar>
+                        <TodoList data={this.state.data} />
+                    </div>
+                    <Footer/>
+                </div>
+
             );
         }
         else {
@@ -44,7 +49,7 @@ class Todo extends React.Component {
             });
     }
 
-    
+
 
 
 }

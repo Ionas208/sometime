@@ -9,6 +9,7 @@ import Register from './Register';
 import Todo from './Todo';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import TodoCalenderController from './TodoCalenderController';
+import Detail from './Detail'
 
 
 const routing = (
@@ -20,6 +21,7 @@ const routing = (
       <Route path="/register" component={Register}/>
       <Route path="/todo" component={Todo}/>
       <Route path="/calender" component={TodoCalenderController}/>
+      <Route exact path="/detail/:date" component={Detail}/>
     </div>
   </Router>
 )

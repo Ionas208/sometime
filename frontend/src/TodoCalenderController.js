@@ -1,6 +1,8 @@
 import React from 'react';
 import TodoCalender from './TodoCalender'
 import TopBar from './TopBar';
+import LeftBar from './LeftBar'
+import Footer from './Footer'
 
 class TodoCalenderController extends React.Component {
     constructor(props) {
@@ -18,14 +20,21 @@ class TodoCalenderController extends React.Component {
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
-        return (<div className="container">
+        return (
+        <div className="container">
             <TopBar />
-            <div className="calenderControls">
-                <button className="calenderBackButton" onClick={this.back}>back</button>
-                <h2 className="calenderMonthTitle">{monthNames[this.state.month ]} {this.state.year}</h2>
-                <button className="calenderForwardButton" onClick={this.forward}>forward</button>
+            <div className="containerForLeftBar">
+                <LeftBar className="LeftBar" />
+                <div className="container">
+                    <div className="calenderControls">
+                        <button className="calenderBackButton" onClick={this.back}>back</button>
+                        <h2 className="calenderMonthTitle">{monthNames[this.state.month]} {this.state.year}</h2>
+                        <button className="calenderForwardButton" onClick={this.forward}>forward</button>
+                    </div>
+                    <TodoCalender month={this.state.month} year={this.state.year} />
+                </div>
             </div>
-            <TodoCalender month={this.state.month} year={this.state.year} />
+            <Footer/>
         </div>);
     }
 

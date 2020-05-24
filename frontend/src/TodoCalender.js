@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom'
 
 class TodoCalender extends React.Component {
     constructor(props) {
@@ -11,16 +12,18 @@ class TodoCalender extends React.Component {
 
     static getDerivedStateFromProps(props, state) {
         if (props.month !== state.month || props.year !== state.year) {
-          return {
-            month: props.month,
-            year: props.year
-          };
+            return {
+                month: props.month,
+                year: props.year
+            };
         }
         return null;
-      }
+    }
 
     render() {
-        return (<table className="calenderTable"><tbody className="calenderBody">{this.createTodoCalender()}</tbody></table>);
+        return (
+            <table className="calenderTable"><tbody className="calenderBody">{this.createTodoCalender()}</tbody></table>
+        );
     }
 
     createTodoCalender() {
@@ -56,30 +59,45 @@ class TodoCalender extends React.Component {
 
 class TodoCalenderTile extends React.Component {
     constructor(props) {
-        super(props);  
-        this.state = { day: props.day, month: props.month, year: props.year, todos: [] }
+        super(props);
+        this.state = { day: props.day, month: props.month, year: props.year, todos: [] , redirectToDetail: false}
         this.createTodoList = this.createTodoList.bind(this)
         this.updateTasks = this.updateTasks.bind(this);
+        this.onDetail = this.onDetail.bind(this);
     }
 
     static getDerivedStateFromProps(props, state) {
         if (props.month !== state.month) {
-          return {
-            month: props.month,
-            year: props.year
-          };
+            return {
+                month: props.month,
+                year: props.year
+            };
         }
         return null;
-      }
+    }
 
-    componentDidUpdate(prevProps){
-        if(this.props.month !== prevProps.month){
+    componentDidUpdate(prevProps) {
+        if (this.props.month !== prevProps.month) {
             this.updateTasks();
         }
     }
 
     render() {
-        return (<div>{this.createTodoList()}</div>)
+        if(this.state.redirectToDetail){
+            let day = this.state.day;
+            let month = this.state.month;
+            if(this.state.day<10){
+                day = 0+""+this.state.day
+            }
+            if(this.state.month<10){
+                month = 0+""+this.state.month
+            }
+            let date = day+""+month+""+this.state.year;
+            return (<Redirect to={`/detail/${date}`}/>);
+        }
+        else{
+            return (<div onClick={() => {this.onDetail()}}>{this.createTodoList()}</div>)
+        }
     }
 
     createTodoList() {
@@ -98,7 +116,11 @@ class TodoCalenderTile extends React.Component {
         this.updateTasks();
     }
 
-    updateTasks(){
+    onDetail(event){
+        this.setState({redirectToDetail: true});
+    }
+
+    updateTasks() {
         let date = "{0}-{1}-{2}T22:00:00.000Z".format(this.state.year, this.state.month + 1, this.state.day);
         const requestOptions = {
             method: 'POST',
@@ -111,13 +133,13 @@ class TodoCalenderTile extends React.Component {
                 if (json.data.length !== 0) {
                     this.setState({ todos: json.data });
                 }
-                else{
+                else {
                     this.setState({ todos: [] });
                 }
 
             })
-            .catch(() => {
-                console.log("error")
+            .catch((err) => {
+                console.log(err.message)
             })
     }
 
