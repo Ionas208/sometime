@@ -1,4 +1,6 @@
 import React from 'react';
+import TopBar from './TopBar'
+import { Redirect, Link } from 'react-router-dom'
 
 class Register extends React.Component {
     constructor(props) {
@@ -13,7 +15,8 @@ class Register extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
+                <TopBar/>
                 <h1>Register</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label>
@@ -31,6 +34,10 @@ class Register extends React.Component {
                     </label>
                     <input type="submit" value="Submit" />
                 </form>
+                <div>
+                             Already have an account? 
+                            <Link to="/login">Login</Link>
+                        </div>
             </div>);
     }
 

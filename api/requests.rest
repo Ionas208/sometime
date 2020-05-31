@@ -41,3 +41,15 @@ Content-Type: application/json
 {
     "date": "2020-5-23T22:00:00.000Z"
 }
+
+###
+
+POST http://localhost:3000/api/deleteTodo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNTg5OTIzOTU4fQ.07Y7w5ShxDdu4vjMmVB7uDO_QH7m1TuYuBNDQ0tlrzw
+Content-Type: application/json
+
+
+{
+    "todoid": "1"
+}
+

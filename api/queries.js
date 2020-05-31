@@ -83,7 +83,7 @@ const loginUser = (req, res) => {
 
 const getTodosForUser = (req, res) => {
     const userid = req.user.id;
-    pool.query("SELECT title, description, duedate FROM todoobject WHERE userid = " + userid, function (err, result) {
+    pool.query("SELECT todoid, title, description, duedate FROM todoobject WHERE userid = " + userid, function (err, result) {
         if (err) {
             res.sendStatus(500)
         }
@@ -98,7 +98,7 @@ const getTodosForDate = (req, res) => {
     
     const userid = req.user.id;
     const date = req.body.date;
-    pool.query("SELECT title, description FROM todoobject WHERE duedate = '{0}' AND userid = {1}".format(date, userid), function (err, result) {
+    pool.query("SELECT todoid, title, description FROM todoobject WHERE duedate = '{0}' AND userid = {1}".format(date, userid), function (err, result) {
         if (err) {
             res.status(200).json({hasTodos: false})
         }
@@ -137,6 +137,22 @@ const getUserName = (req,res) =>{
     })
 }
 
+const deleteTodo = (req, res) =>{
+    const todoid = req.body.todoid;
+    pool.query("DELETE FROM todoobject WHERE todoid="+todoid, function(err, result){
+        if(err){
+            res.sendStatus(500);
+        }
+        else{
+            res.sendStatus(200);
+        }
+    })
+}
+
+const checkToken = (req, res) =>{
+    res.sendStatus(200);
+}
+
 String.prototype.format = function () {
     var formatted = this;
     for (var arg in arguments) {
@@ -145,4 +161,4 @@ String.prototype.format = function () {
     return formatted;
 };
 
-module.exports = { getAllUsers, registerUser, loginUser, getTodosForUser, createTodo, getUserName, getTodosForDate} 
+module.exports = { getAllUsers, registerUser, loginUser, getTodosForUser, createTodo, getUserName, getTodosForDate, deleteTodo, checkToken} 

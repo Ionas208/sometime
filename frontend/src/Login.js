@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import TopBar from './TopBar'
 
 class Login extends React.Component {
@@ -21,14 +21,18 @@ class Login extends React.Component {
                         <form onSubmit={this.handleSubmit}>
                             <label>
                                 E-Mail:
-                    <input type="text" value={this.state.emailValie} onChange={this.handleEmailChange}></input>
+                    <input type="text" value={this.state.emailValue} onChange={this.handleEmailChange}></input>
                             </label>
                             <label>
                                 Password:
                     <input type="password" value={this.state.passwordValue} onChange={this.handlePasswordChange}></input>
                             </label>
                             <input type="submit" value="Submit" />
-                        </form></div>
+                        </form>
+                        <div>
+                        Not logged in? 
+                            <Link to="/register">Register</Link>
+                        </div></div>
                 </div>
             );
         }
@@ -48,7 +52,12 @@ class Login extends React.Component {
                     <input type="password" value={this.state.passwordValue} onChange={this.handlePasswordChange}></input>
                             </label>
                             <input type="submit" value="Submit" />
-                        </form></div>
+                        </form>
+                        <div>
+                             Don't have an account? 
+                            <Link to="/register">Register</Link>
+                        </div>
+                        </div>
                 </div>);
         }
         else {

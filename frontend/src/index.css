@@ -1,8 +1,64 @@
+:root {
+  --col1: #009eff;
+  --col2: #a2d729;
+}
+
 body, html{
   margin: 0;
   width: 100%;
   height: 100%;
-  background-color: hotpink;
+  font-family: 'comfortaa';
+  overflow: hidden;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border-bottom: 1px solid black;
+}
+
+td, th{
+  text-align: left;
+  padding: 16px;
+}
+
+th{
+  font-size: 125%;
+  font-weight: 900;
+}
+
+.todoListTable{
+  width: 100%;
+}
+
+thead{
+  top: 0;
+  position: sticky;
+}
+
+.todoTableRow:hover{
+  background-color: rgba(0,147,255,0.2);
+}
+
+.check:hover{
+  color: #00DF06;
+}
+
+.plus:hover{
+  color: #00DF06;
+}
+
+.tableContainer{
+  margin: 20px;
+  width: 100%;
+  height: 90%;
+  overflow: auto;
+}
+
+.hideThisShit{
+  display: none;
 }
 
 .container{
@@ -18,29 +74,79 @@ body, html{
 
 .topbar{
   margin: 0;
+  margin-left: 10px;
   width: 100%;
   height: 10%;
-  background-color: cyan;
+  border-bottom: solid 2px #C8C8C8;
+}
+
+.logoContainer{
+  height: 100%;
+  width: 25%;
+  margin: 0;
+  float: left;
+  display: flex;
+  align-items: center;
 }
 
 .logo{
-  height: 100%;
-  margin: 0;
-  float: left;
-  background-color: red;
+  
+  background-color: white;
+  font-family: 'comfortaa';
+  font-weight: 700;
+  font-size: 225%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.logoPart1{
+  color: var(--col1);
+}
+
+.logoPart2{
+  color: var(--col2);
 }
 
 .userIconTopBar{
   height: 100%;
-  margin: 0;
+  margin-right: 25px;
   float: right;
-  background-color: limegreen;
+  display: table;
+}
+
+.userIconTopBar>div{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.userIconTopBar>div>i{
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 150%;
+  padding: 10px;
+  border-radius: 50%;
+  border: solid 2px black;
+}
+
+.userIconMenu{
+  margin-top: 60px;
+}
+
+.UserCard{
+  height: 200px;
+  width: 150px;
 }
 
 .calenderTile{
   width: 14.2857%;
-  background-color: yellow;
-  outline: solid 1px black;
+  border-left: 1px black solid;
+  border-right: 1px black solid;
+  border-top: 1px black solid;
+}
+
+.calenderTile:hover{
+  background-color: rgba(0,147,255,0.2);
+  cursor: pointer;
 }
 
 .calenderRow{
@@ -55,23 +161,38 @@ body, html{
 .calenderTable{
   width:  100%;
   height: 65%;
+  border-collapse: collapse;
 }
 
 .calenderControls{
   width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .calenderBackButton{
+  margin-left: 15px;
+  font-size: 150%;
+}
+
+.calenderBackButton:hover{
+  cursor: pointer;
+  color: var(--col1);
 }
 
 .calenderMonthTitle{
-  width: 25%;
+  width: 20%;
   text-align: center;
 }
 
 .calenderForwardButton{
+  font-size: 150%;
+}
+
+.calenderForwardButton:hover{
+  cursor: pointer;
+  color: var(--col1);
 }
 
 .containerForLeftBar{
@@ -81,21 +202,126 @@ body, html{
   flex-direction: row;
 }
 
+.calenderContainer{
+  margin: 20px;
+  width: 100%;
+}
+
+.calenderTileContainer{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.calenderTileHeadline{
+  font-size: 120%;
+}
+
+.calenderTileCircle{
+  font-size: 60%;
+  margin-left: 8px;
+  color: var(--col1)
+}
+
 .LeftBar{
-  width: 20%;
   height: 100%;
 }
 
 .LeftBarContainer{
-  background-color: purple;
+  margin: 5px;
+  border-right: solid 2px #C8C8C8;
+  width: 250px;
+}
+
+.LeftBarContainer2{
+  margin-top: 20px;
+}
+
+.LeftBarLink{
+  font-size: 130%;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 11px;
+  width: 70%;
 }
 
 .LeftBarLink>a{
-  color: white;
+  
+  text-decoration: none;
+  color: black;
+}
+
+.LeftBarLink:hover{
+  background-color: rgba(0,147,255,0.2);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  color: black;
 }
 
 .Footer{
   height: 10%;
-  background-color: black;
+  background-color: #181818;
   color: white;
+}
+
+
+.indexContainer{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.frame{
+  margin-top: 7%;
+  width: 400px;
+  height: 500px;
+  border: solid 2px #C8C8C8;
+  border-radius: 20px;
+}
+
+#indexFrame{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+button{
+  background-color: var(--col1); /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+}
+
+.frameHeadline{
+  font-size: 200%;
+  font-weight: 700;
+  padding: 10px;
+  margin: 10px;
+  padding-bottom: 0;
+  margin-bottom: 0px;
+  margin-top: 20px;
+}
+
+.indexButton{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#indexLogin{
+  margin-top: 70px;
+}
+
+#orDiv{
+  font-size: 175%;
+  font-weight: 700;
 }

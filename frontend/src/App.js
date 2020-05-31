@@ -1,33 +1,68 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import TopBar from './TopBar'
+import Logo from './Logo'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {redirect: false};
+    this.state = { redirect: false, redirectToTodo: false, redirectToRegister: false};
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
   }
 
   render() {
-    if(this.state.redirect){
-      return(
+    if (this.state.redirect) {
+      return (
         <Redirect to='/login' />
       );
     }
-    else{
+    else if (this.state.redirectToTodo) {
+      return (
+        <Redirect to='/todo' />
+      );
+    }
+
+    else if(this.state.redirectToRegister){
+      return (
+        <Redirect to='/register' />
+      );
+    }
+
+    else {
       return (
         <div className='container'>
-          <TopBar/>
-          HELLO FROM THE INDEX SITEEEE
-          <button  onClick={this.handleLogin}>login</button>
+          <TopBar />
+          <div className='indexContainer'>
+            <div className="frame" id="indexFrame">
+              <div className="container">
+              <div className="frameHeadline">Welcome to</div>
+              <Logo/>
+              <button className="indexButton" id="indexLogin" onClick={this.handleLogin}>Login</button>
+              <div id="orDiv">or</div>
+              <button className="indexButton" onClick={this.handleRegister}>Register</button>
+              </div>
+              
+              </div>
+          </div>
+
         </div>
-      );  
+      );
     }
   }
 
-  handleLogin(event){
-    this.setState({redirect: true});
+  componentWillMount() {
+    if (localStorage.getItem("token") != null) {
+      this.setState({ redirectToTodo: true })
+    }
+  }
+
+  handleLogin(event) {
+    this.setState({ redirect: true });
+  }
+
+  handleRegister(event){
+    this.setState({redirectToRegister: true });
   }
 }
 

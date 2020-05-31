@@ -36,6 +36,8 @@ app.post('/api/getTodo', authenticateToken, db.getTodosForUser);
 app.post('/api/createTodo', authenticateToken, db.createTodo);
 app.get('/api/getUsernameFromToken', authenticateToken, db.getUserName);
 app.post('/api/getTodosForDate', authenticateToken, db.getTodosForDate);
+app.post('/api/deleteTodo', authenticateToken, db.deleteTodo);
+app.get('/api/checkToken', authenticateToken, db.checkToken);
 
 app.use(cors());
 

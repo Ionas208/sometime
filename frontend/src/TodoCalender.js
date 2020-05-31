@@ -61,7 +61,7 @@ class TodoCalenderTile extends React.Component {
     constructor(props) {
         super(props);
         this.state = { day: props.day, month: props.month, year: props.year, todos: [] , redirectToDetail: false}
-        this.createTodoList = this.createTodoList.bind(this)
+        this.createTile = this.createTile.bind(this)
         this.updateTasks = this.updateTasks.bind(this);
         this.onDetail = this.onDetail.bind(this);
     }
@@ -96,19 +96,19 @@ class TodoCalenderTile extends React.Component {
             return (<Redirect to={`/detail/${date}`}/>);
         }
         else{
-            return (<div onClick={() => {this.onDetail()}}>{this.createTodoList()}</div>)
+            return (<div className="container" onClick={() => {this.onDetail()}}>{this.createTile()}</div>)
         }
     }
 
-    createTodoList() {
+    createTile() {
         let list = [];
-        let items = [];
-        for (let i = 0; i < Object.keys(this.state.todos).length; i++) {
-            items.push(<div className="calenderTodoTileTask">
-                <div className="calenderTodoTileTaskTitle">{this.state.todos[i].title}</div>
-            </div>)
+        if(Object.keys(this.state.todos).length==0){
+            list.push(<div className="calenderTileContainer"><span className="calenderTileHeadline">{this.state.day}</span></div>)
         }
-        list.push(<div><h4>{this.state.day}</h4><div>{items}</div></div>)
+        else{
+            list.push(<div className="calenderTileContainer"><span className="calenderTileHeadline">{this.state.day}</span><span className="calenderTileCircle"><i class="fas fa-circle"></i></span></div>)
+        }
+        
         return list;
     }
 

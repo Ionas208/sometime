@@ -23,7 +23,7 @@ class UserCard extends React.Component {
         else{
             if (!this.state.isFetched) {
                 return (
-                    <div>
+                    <div className="UserCard">
                         <i className="fas fa-user"></i>
                         <button onClick={this.handleLoginRedirect}>login</button>
                     </div>
@@ -32,7 +32,7 @@ class UserCard extends React.Component {
             else {
                 if (this.state.isLoggedIn) {
                     return (
-                        <div>
+                        <div className="UserCard">
                             <i className="fas fa-user"></i>
                             <div>{this.state.username}</div>
                             <button onClick={this.logout}> logout</button>
@@ -42,7 +42,7 @@ class UserCard extends React.Component {
                 else {
                     return (
     
-                        <div>
+                        <div className="UserCard">
                             <i className="fas fa-user"></i>
                             <button onClick={this.handleLoginRedirect}>login</button>
                         </div>
