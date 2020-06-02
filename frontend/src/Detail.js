@@ -18,56 +18,71 @@ class Detail extends React.Component {
     }
 
     render() {
-        var toRender = [];
-        toRender.push(<div className="detailHeadline">Your Tasks on the {this.state.date}: </div>)
-                toRender.push(<div className="tableContainer">
-                    <table className="todoListTable">
-                        <thead>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th className="plus" onClick={this.handleOpen}><i class="fas fa-plus"></i></th>
-                            <Menu
-                                className="addTaskMenu"
-                                anchorEl={this.state.anchorEl}
-                                keepMounted
-                                open={Boolean(this.state.anchorEl)}
-                                onClose={this.handleClose}
-                            >
-                                <form onSubmit={this.handleSubmit}>
-                                    <div>
-                                        <label>
-                                            Title
-                        <input type="text" value={this.state.title} onChange={this.handleTitleChange}></input>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label>
-                                            Description:
-                        <textarea value={this.state.description} onChange={this.handleDescriptionChange}></textarea>
-                                        </label>
-                                    </div>
-
-                                    <input type="submit" value="Submit" />
-                                </form>
-                            </Menu>
-                        </thead>
-                        <tbody>{this.createTodoTable()}
-                        </tbody>
-                    </table>
-                </div>)
-            
-        return (
-            <div className="container">
-                <TopBar />
-                <div className="containerForLeftBar">
-                    <LeftBar className="LeftBar" />
-                    <div className="container">
-                        {toRender}
+        if(this.state.date != null){
+            var toRender = [];
+            var date = this.state.date;
+            var year = date.split("T")[0].split("-")[0];
+            var month = date.split("T")[0].split("-")[1];
+            var day = date.split("T")[0].split("-")[2];
+            toRender.push(<div className="detailHeadline">Your Tasks on the {day}.{month}.{year}: </div>)
+                    toRender.push(<div className="tableContainer">
+                        <table className="todoListTable">
+                            <thead>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th className="plus" onClick={this.handleOpen}><i class="fas fa-plus"></i></th>
+                                <Menu
+                                    className="addDetailTaskMenu"
+                                    anchorEl={this.state.anchorEl}
+                                    keepMounted
+                                    open={Boolean(this.state.anchorEl)}
+                                    onClose={this.handleClose}
+                                >
+                                    <div className="addDetailMenu">
+                                    <h2 className="addHeadline">Add a new Task:</h2>
+                                    <form onSubmit={this.handleSubmit}>
+                                        <div className="addInputContainer">
+                                            <label>
+                                                Title
+                                <input className="addInput" type="text" value={this.state.title} onChange={this.handleTitleChange}></input>
+                                            </label>
+                                        </div>
+                                        <div className="addInputContainer">
+                                            <label>
+                                                Description:
+                                <textarea className="addTextArea" value={this.state.description} onChange={this.handleDescriptionChange}></textarea>
+                                            </label>
+                                        </div>
+                                        <div id="divToCenter">
+                                            <input className="addSubmit" type="submit" value="Submit" />
+                                        </div>
+    
+                                    </form>
+                                </div>
+                                </Menu>
+                            </thead>
+                            <tbody>{this.createTodoTable()}
+                            </tbody>
+                        </table>
+                    </div>)
+                
+            return (
+                <div className="container">
+                    <TopBar />
+                    <div className="containerForLeftBar">
+                        <LeftBar className="LeftBar" />
+                        <div className="container">
+                            {toRender}
+                        </div>
                     </div>
-                </div>
-
-                <Footer />
-            </div>);
+    
+                    <Footer />
+                </div>);
+        }
+        else{
+            return <div></div>
+        }
+        
     }
 
     createTodoTable() {

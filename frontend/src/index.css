@@ -135,6 +135,28 @@ thead{
 .UserCard{
   height: 200px;
   width: 150px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.UserCardText{
+  margin-bottom: 25px;
+}
+
+.UserCardButton{
+  font-size: 85%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.UserCardIcon{
+  margin-top: 15px;
+  font-size: 250%;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
 .calenderTile{
@@ -263,8 +285,23 @@ thead{
 
 .Footer{
   height: 10%;
-  background-color: #181818;
-  color: white;
+  background-color: #1F1F1F;
+  color: #A2A2A2;
+  display: flex;
+  align-items: flex-end;
+}
+
+#d1{
+  float: left;
+}
+
+#d2{
+  float: right;
+}
+
+#d3{
+  margin: 10px;
+ width: 100%;
 }
 
 
@@ -385,4 +422,85 @@ button{
   height: 600px;
   border: solid 2px #C8C8C8;
   border-radius: 20px;
+}
+
+.addMenu{
+  height: 400px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.addDetailMenu{
+  height: 300px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.addMenu>form{
+  width: 90%;
+  height: 80%;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.addTaskMenu{
+  margin-top: 135px;
+}
+
+.addDetailTaskMenu{
+  margin-top: 180px;
+}
+
+.addInputContainer{
+  text-align: left;
+  margin-top: 15px;
+}
+
+.addInput{
+  width: 90%;
+}
+
+.addDate{
+  width: 90%;
+}
+
+.addTextArea{
+  resize: none;
+  width: 90%;
+  height: 60px;
+}
+
+.addHeadline{
+  margin-top: 15px;
+}
+
+.addSubmit{
+  margin-top: 15px;
+  background-color: var(--col1);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+}
+
+#divToCenter{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detailHeadline{
+  font-size: 200%;
+  margin-top: 20px;
+  margin-left: 20px;
 }

@@ -5,62 +5,64 @@ class UserCard extends React.Component {
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
-        this.state = { username: "", isLoggedIn: false, isFetched: false, redirectToLogin: false , redirectToIndex: false}
+        this.state = { username: "", isLoggedIn: false, isFetched: false, redirectToLogin: false, redirectToIndex: false }
         this.handleLoginRedirect = this.handleLoginRedirect.bind(this);
+        this.createUserCard = this.createUserCard.bind(this);
     }
 
     render() {
-        if(this.state.redirectToLogin){
-            return(
+        if (this.state.redirectToLogin) {
+            return (
                 <Redirect to='/login' />
             );
         }
-        if(this.state.redirectToIndex){
-            return(
+        if (this.state.redirectToIndex) {
+            return (
                 <Redirect to='/' />
             );
         }
+        if (!this.state.isFetched) {
+            return this.createUserCard();
+        }
+        else {
+            return this.createUserCard();
+
+        }
+
+    }
+
+    createUserCard(){
+        let usercard = [];
+
+        if(this.state.isLoggedIn){
+            usercard.push(
+                <div className="UserCard">
+                        <i className="fas fa-user UserCardIcon"></i>
+                        <div className="UserCardText" >Hello, {this.state.username}</div>
+                        <button className="UserCardButton" onClick={this.logout}>logout</button>
+                </div>
+            )
+        }
         else{
-            if (!this.state.isFetched) {
-                return (
-                    <div className="UserCard">
-                        <i className="fas fa-user"></i>
-                        <button onClick={this.handleLoginRedirect}>login</button>
-                    </div>
-                );
-            }
-            else {
-                if (this.state.isLoggedIn) {
-                    return (
-                        <div className="UserCard">
-                            <i className="fas fa-user"></i>
-                            <div>{this.state.username}</div>
-                            <button onClick={this.logout}> logout</button>
-                        </div>
-                    );
-                }
-                else {
-                    return (
-    
-                        <div className="UserCard">
-                            <i className="fas fa-user"></i>
-                            <button onClick={this.handleLoginRedirect}>login</button>
-                        </div>
-                    );
-                }
-    
-            }
-        } 
+            usercard.push(
+                <div className="UserCard">
+                        <i className="fas fa-user UserCardIcon"></i>
+                        <button className="UserCardButton" onClick={this.handleLoginRedirect}>login</button>
+                </div>
+            )
+        }
+
+        return usercard;
     }
 
     logout(event) {
         localStorage.removeItem('token')
-        this.setState({redirectToIndex: true});
+        this.setState({ redirectToIndex: true });
         this.updateUsername();
     }
 
-    handleLoginRedirect(event){
-        this.setState({redirectToLogin: true});
+    handleLoginRedirect(event) {
+        this.setState({ redirectToLogin: true });
     }
 
     componentDidMount() {
@@ -75,7 +77,7 @@ class UserCard extends React.Component {
         fetch('http://localhost:3000/api/getUsernameFromToken', requestOptions)
             .then(res => res.json())
             .then(json => {
-                this.setState({ isLoggedIn: true, isFetched: true, username: json.username });
+                this.setState({ isLoggedIn: true, isFetched: true, username: json[0].username });
             }).catch(() => {
                 this.setState({ isLoggedIn: false, isFetched: true });
             });
