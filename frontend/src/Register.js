@@ -1,6 +1,7 @@
 import React from 'react';
 import TopBar from './TopBar'
 import { Redirect, Link } from 'react-router-dom'
+import Logo from './Logo'
 
 class Register extends React.Component {
     constructor(props) {
@@ -10,35 +11,67 @@ class Register extends React.Component {
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.performRegister = this.performRegister.bind(this);
-        this.state = { nameValue: "", passwordValue: "", emailValue: "" };
+        this.createRegister = this.createRegister.bind(this);
+        this.state = { nameValue: "", passwordValue: "", emailValue: "", redirectToTodo: false};
     }
 
     render() {
-        return (
-            <div className="container">
-                <TopBar/>
-                <h1>Register</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Name:
-                <input type="text" value={this.state.nameValue} onChange={this.handleNameChange}></input>
-                    </label>
+        if(this.state.redirectToTodo){
+            return (<Redirect to="/todo"/>);
+        }
+        else{
+            return (
+                this.createRegister()
+            );
+        } 
+    }
 
-                    <label>
-                        E-Mail:
-                <input type="text" value={this.state.emailValue} onChange={this.handleEmailChange}></input>
+    createRegister(){
+        let reg = [];
+        reg.push(
+            <div className="container">
+                <TopBar />
+                <div className="loginContainer">
+                    <div className="frameLarge" id="loginFrame">
+                        <div className="container">
+                            <h1 className="frameHeadline">Register at</h1>
+                            <Logo />
+                            <div className="container">
+                                <form onSubmit={this.handleSubmit}>
+                                    <div className="inputContainer">
+                                    <label>
+                        Name:
+                <input className="loginInput" type="text" value={this.state.nameValue} onChange={this.handleNameChange}></input>
                     </label>
-                    <label>
-                        Password:
-                <input type="password" value={this.state.passwordValue} onChange={this.handlePasswordChange}></input>
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
-                <div>
-                             Already have an account? 
-                            <Link to="/login">Login</Link>
+                                    </div>
+                                    <div className="inputContainer">
+                                        <label>
+                                            E-Mail:
+                    <input className="loginInput" type="text" value={this.state.emailValie} onChange={this.handleEmailChange}></input>
+                                        </label>
+                                    </div>
+                                    <div className="inputContainer">
+                                        <label>
+                                            Password:
+                    <input className="loginInput" type="password" value={this.state.passwordValue} onChange={this.handlePasswordChange}></input>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        Already have an ccount?
+                            <Link className="loginLinkTo" to="/login">Login</Link>
+                                    </div>
+                                    <input className="loginSubmit" type="submit" value="Register" />
+                                </form>
+
+                            </div>
+
                         </div>
-            </div>);
+
+                    </div>
+                </div>
+            </div>
+        )
+        return reg;
     }
 
     handleSubmit(event) {
@@ -65,7 +98,13 @@ class Register extends React.Component {
             body: JSON.stringify({user: this.state.nameValue, email: this.state.emailValue, password: this.state.passwordValue})
         };
         fetch('http://localhost:3000/api/register', requestOptions).then(res =>{
-            console.log(res);
+            if(res.ok){
+                this.setState({redirectToTodo: true});
+            }
+            else{
+                alert("Register unsuccessful! Try again!")
+                window.location.reload(false); 
+            }
         });
     }
 }

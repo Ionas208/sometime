@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom'
 import TopBar from './TopBar'
+import Logo from './Logo'
 
 class Login extends React.Component {
     constructor(props) {
@@ -8,62 +9,63 @@ class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.createLogin = this.createLogin.bind(this)
         this.state = { emailValue: "", passwordValue: "", isLoggedIn: false, isFetched: false };
     }
 
     render() {
         if (!this.state.isFetched) {
-            return (
-                <div className="container">
-                    <TopBar/>
-                    <div>
-                        <h1>Login</h1>
-                        <form onSubmit={this.handleSubmit}>
-                            <label>
-                                E-Mail:
-                    <input type="text" value={this.state.emailValue} onChange={this.handleEmailChange}></input>
-                            </label>
-                            <label>
-                                Password:
-                    <input type="password" value={this.state.passwordValue} onChange={this.handlePasswordChange}></input>
-                            </label>
-                            <input type="submit" value="Submit" />
-                        </form>
-                        <div>
-                        Not logged in? 
-                            <Link to="/register">Register</Link>
-                        </div></div>
-                </div>
-            );
+            return this.createLogin();
         }
         if (!this.state.isLoggedIn) {
-            return (
-                <div className="container">
-                    <TopBar/>
-                    <div>
-                        <h1>Login</h1>
-                        <form onSubmit={this.handleSubmit}>
-                            <label>
-                                E-Mail:
-                    <input type="text" value={this.state.emailValie} onChange={this.handleEmailChange}></input>
-                            </label>
-                            <label>
-                                Password:
-                    <input type="password" value={this.state.passwordValue} onChange={this.handlePasswordChange}></input>
-                            </label>
-                            <input type="submit" value="Submit" />
-                        </form>
-                        <div>
-                             Don't have an account? 
-                            <Link to="/register">Register</Link>
-                        </div>
-                        </div>
-                </div>);
+            return this.createLogin();
         }
         else {
             return <Redirect to='/todo' />
         }
 
+    }
+
+    createLogin() {
+        let login = [];
+        login.push(
+            <div className="container">
+                <TopBar />
+                <div className="loginContainer">
+                    <div className="frame" id="loginFrame">
+                        <div className="container">
+                            <h1 className="frameHeadline">Login to</h1>
+                            <Logo />
+                            <div className="container">
+                                <form onSubmit={this.handleSubmit}>
+                                    <div className="inputContainer">
+                                        <label>
+                                            E-Mail:
+                    <input className="loginInput" type="text" value={this.state.emailValie} onChange={this.handleEmailChange}></input>
+                                        </label>
+                                    </div>
+                                    <div className="inputContainer">
+                                        <label>
+                                            Password:
+                    <input className="loginInput" type="password" value={this.state.passwordValue} onChange={this.handlePasswordChange}></input>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        Don't have an account?
+                            <Link className="loginLinkTo" to="/register">Register</Link>
+                                    </div>
+                                    <input className="loginSubmit" type="submit" value="Login" />
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        )
+        return login;
     }
 
     handleSubmit(event) {

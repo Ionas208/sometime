@@ -6,7 +6,7 @@ import Logo from './Logo'
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { redirect: false, redirectToTodo: false, redirectToRegister: false};
+    this.state = { redirect: false, redirectToTodo: false, redirectToRegister: false };
     this.handleLogin = this.handleLogin.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
   }
@@ -23,7 +23,7 @@ class App extends React.Component {
       );
     }
 
-    else if(this.state.redirectToRegister){
+    else if (this.state.redirectToRegister) {
       return (
         <Redirect to='/register' />
       );
@@ -36,14 +36,14 @@ class App extends React.Component {
           <div className='indexContainer'>
             <div className="frame" id="indexFrame">
               <div className="container">
-              <div className="frameHeadline">Welcome to</div>
-              <Logo/>
-              <button className="indexButton" id="indexLogin" onClick={this.handleLogin}>Login</button>
-              <div id="orDiv">or</div>
-              <button className="indexButton" onClick={this.handleRegister}>Register</button>
+                <div className="frameHeadline">Welcome to</div>
+                <Logo />
+                <button className="indexButton" id="indexLogin" onClick={this.handleLogin}>Login</button>
+                <div id="orDiv">or</div>
+                <button className="indexButton" onClick={this.handleRegister}>Register</button>
               </div>
-              
-              </div>
+
+            </div>
           </div>
 
         </div>
@@ -61,8 +61,8 @@ class App extends React.Component {
     this.setState({ redirect: true });
   }
 
-  handleRegister(event){
-    this.setState({redirectToRegister: true });
+  handleRegister(event) {
+    this.setState({ redirectToRegister: true });
   }
 }
 
